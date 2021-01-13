@@ -1,0 +1,8 @@
+- name: customize Ansible Tower
+  hosts: tower
+  vars: 
+    ansible_python_interpreter: '/usr/libexec/platform-python'
+  vars_files:
+    - ../vaults/tower_vault.yml
+  roles:
+    - role: maxrainer.tower_configure
