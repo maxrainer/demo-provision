@@ -8,3 +8,5 @@
     - role: maxrainer.f5_loadbalancer
   gather_facts: false
   connection: local
+  collections:
+    - f5networks.f5_modules
