@@ -1,0 +1,63 @@
+---
+
+################################
+# provision
+################################
+- name: provision demo on AWS cloud
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - ../vars/shared_vars.yml
+  roles:
+    - role: maxrainer.aws_provision
+  tasks:
+    - meta: refresh_inventory
+  tags: [always]
+  
+################################
+# post post provision
+################################
+- name: post provisioning
+  hosts: all
+  connection: local
+  gather_facts: false
+  vars_files:
+    - ../vars/shared_vars.yml
+    - ../vaults/tower_vault.yml
+  vars:
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
+  roles:
+    - role: maxrainer.aws_route53
+  tags: [always]
+
+################################
+# software
+################################
+- name: install Ansible tower
+  hosts: function_tower
+  gather_facts: false
+  vars: 
+    ansible_ssh_user: ec2-user
+    ansible_python_interpreter: '/usr/libexec/platform-python'
+  vars_files:
+    - ../vars/shared_vars.yml
+    - ../vaults/tower_vault.yml
+  roles:
+    - role: maxrainer.tower_install
+      tags: [install]
+    - role: maxrainer.tower_configure
+  tags: [always]
+
+################################
+# teardown
+################################
+- name: TEARDOWN AWS DEMO
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - ../vars/shared_vars.yml
+  roles:
+    - role: maxrainer.aws_provision
+  tasks:
+    - meta: refresh_inventory
+  tags: [never, teardown]

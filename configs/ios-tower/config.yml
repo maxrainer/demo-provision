@@ -1,0 +1,35 @@
+---
+
+tower_roles:
+  - network_cli
+  - network_rm
+
+ec2_lab_count: 24
+ec2_feature_router: true
+ec2_feature_server: true
+
+ec2_vpc_subnets:
+  - "172.16.0.0/24"   # management
+  - "172.16.1.0/24"   # WAN
+  - "172.16.2.0/24"   # headquarter LAN
+
+ec2_linux_server:
+  - "{{ ec2_linux_server_tower }}"
+
+ec2_routers:
+  - name: CSR 1000-1
+    short: csr1
+    instance_type: rt_cisco_csr
+    public_ip: yes
+    networks:
+      - subnet: 0
+        address: 172.16.0.101
+      - subnet: 1
+        address: 172.16.1.101
+      - subnet: 2 
+        address: 172.16.2.101
+    tags: 
+      bgp_peers:
+        - 172.16.1.102
+        - 172.16.1.103
+

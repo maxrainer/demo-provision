@@ -1,0 +1,12 @@
+---
+
+pem_key_name: aws-demo
+pem_key_location: ~/.ssh/
+
+aws_route53_public_zone: 'maxrainer.net'
+aws_route53_private_zone: 'maxrainer.priv'
+
+ec2_name_prefix: net-demo
+ec2_region: eu-central-1
+aws_name_prefix: "{{ ec2_name_prefix }}"
+aws_region: "{{ ec2_region }}"

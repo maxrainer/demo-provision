@@ -1,0 +1,10 @@
+---
+
+- name: TEARDOWN AWS DEMO
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+     - ../vars/shared_vars.yml
+  roles:
+    - role: maxrainer.aws_provision
+      tags: server

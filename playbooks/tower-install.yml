@@ -1,0 +1,6 @@
+- name: install Ansible tower
+  hosts: tower
+  vars: 
+    ansible_python_interpreter: '/usr/libexec/platform-python'
+  roles:
+    - role: maxrainer.tower_install
