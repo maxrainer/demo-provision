@@ -1,4 +1,5 @@
 # galaxy
-- name: f5networks.f5_modules
+collections: 
+  - name: f5networks.f5_modules
 
 
