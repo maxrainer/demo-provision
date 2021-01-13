@@ -3,4 +3,5 @@
 - name: maxrainer.aws_route53
 - name: maxrainer.tower_install
 - name: maxrainer.tower_configure
+- name: maxrainer.f5_loadbalancer
 
