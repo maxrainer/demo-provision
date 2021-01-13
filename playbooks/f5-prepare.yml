@@ -2,8 +2,9 @@
 
 - name: prepare F5 demo (https and license)
   hosts: f5
-  roles: f5-loadbalancer
   vars_files:
     - ../vaults/f5_vault.yml
+  roles: 
+    - role: maxrainer.f5_loadbalancer
   gather_facts: false
   connection: local
